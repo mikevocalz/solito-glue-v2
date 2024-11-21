@@ -30,7 +30,17 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+       "react-native-bottom-tabs",
+     [
+      "expo-build-properties",
+       {
+         "ios": {
+           "useFrameworks": "static",
+             "deploymentTarget": "16.0"
+         }
+        }      
+      ]
     ],
     "experiments": {
       "typedRoutes": true

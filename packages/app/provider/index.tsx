@@ -4,9 +4,14 @@ import { SafeArea } from './safe-area'
 
 
 
-export function Provider({ children }: { children: ReactNode }) {
+type ProviderProps = {
+  children: ReactNode
+  mode: 'light' | 'dark' // If mode is limited to 'light' or 'dark'
+}
+
+export function Provider({ children, mode }: ProviderProps) {
   return(
-    <GluestackUIProvider>
+    <GluestackUIProvider mode={mode}>
        <SafeArea>
         {children}
         </SafeArea>

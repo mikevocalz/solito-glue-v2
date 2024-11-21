@@ -1,9 +1,7 @@
 'use client'
-
 import React, { useRef, useState } from 'react'
 import { useServerInsertedHTML } from 'next/navigation'
 import { StyleRegistry, createStyleRegistry } from 'styled-jsx'
-import { Html, Head, Main, NextScript } from 'next/document'
 // @ts-ignore
 import { AppRegistry } from 'react-native-web'
 import { flush } from '@gluestack-ui/nativewind-utils/flush'
@@ -19,9 +17,8 @@ export default function StyledJsxRegistry({
   const isServerInserted = useRef(false)
 
   useServerInsertedHTML(() => {
-    AppRegistry.registerComponent('Main', () => Main)
+    AppRegistry.registerComponent('Main', () => 'main')
     const { getStyleElement } = AppRegistry.getApplication('Main')
-    console.log(getStyleElement())
     if (!isServerInserted.current) {
       isServerInserted.current = true
       const styles = [getStyleElement(), jsxStyleRegistry.styles(), flush()]

@@ -1,36 +1,49 @@
-const path = require("path");
-const { getDefaultConfig, blacklistRE } = require("expo/metro-config");
+//const webpack = require('webpack')
+const path = require('path')
+const join = path.join
+
+const aliasPathJoin = (moduleFolders) =>
+  join(process.cwd(), '..', '..', 'node_modules', join(...moduleFolders))
+
+const { getDefaultConfig, blacklistRE } = require('expo/metro-config')
 //const blacklist = require('expo/metro-config/');
 
 // 1. Enable CSS for Expo.
 const config = getDefaultConfig(__dirname, {
   isCSSEnabled: true,
-});
+})
 
 // This is not needed for NativeWind, it is configuration for Metro to understand monorepos
-const projectRoot = __dirname;
-const workspaceRoot = path.resolve(projectRoot, "../..");
-config.watchFolders = [workspaceRoot];
-config.resolver.disableHierarchicalLookup = true;
+const projectRoot = __dirname
+const workspaceRoot = path.resolve(projectRoot, '../..')
+config.watchFolders = [workspaceRoot]
+config.resolver.disableHierarchicalLookup = true
 config.resolver.nodeModulesPaths = [
-  path.resolve(projectRoot, "node_modules"),
-  path.resolve(workspaceRoot, "node_modules"),
-];
+  path.resolve(projectRoot, 'node_modules'),
+  path.resolve(workspaceRoot, 'node_modules'),
+]
 
 // 2. Enable NativeWind
-const { withNativeWind } = require("nativewind/metro");
+const { withNativeWind } = require('nativewind/metro')
 
 //4.Configure the react native packager
 module.exports = (async () => {
   const {
-    resolver: { sourceExts, assetExts, exclusionList},
+    resolver: { sourceExts, assetExts, exclusionList },
   } = await getDefaultConfig(__dirname)
   return {
     transformer: {
       babelTransformerPath: require.resolve('react-native-svg-transformer'),
     },
     resolver: {
-      blockList: [config.resolver.blockList, /node_modules\/react-responsive-carousel\/.*/],
+      alias: {
+       'react-native$': 'react-native-web',
+     './ReactNativeSVG': aliasPathJoin(['react-native-svg', 'lib', 'module', 'ReactNativeSVG.web.js']),
+      },
+      blockList: [
+        config.resolver.blockList,
+        /node_modules\/react-responsive-carousel\/.*/,
+      ],
       assetExts: [
         assetExts.filter((ext) => ext !== 'svg'),
         ...assetExts,
@@ -49,7 +62,7 @@ module.exports = (async () => {
         'svg',
         'pdf',
         'ttf',
-        'webp'
+        'webp',
       ],
       sourceExts: [
         ...sourceExts,
@@ -61,15 +74,14 @@ module.exports = (async () => {
         'cjs',
         'svg',
       ],
-    
     },
   }
 })()
 
 module.exports = withNativeWind(config, {
   // 3. Set `input` to your CSS file with the Tailwind at-rules
-  input: "./global.css",
+  input: './global.css',
   // This is optional
   projectRoot,
   inlineRem: false,
-});
+})

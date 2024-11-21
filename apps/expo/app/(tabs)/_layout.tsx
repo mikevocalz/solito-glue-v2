@@ -1,6 +1,15 @@
-import { Tabs } from 'expo-router';
+//import { Tabs } from 'expo-router';
+import { withLayoutContext,Tabs } from 'expo-router'
+import { createNativeBottomTabNavigator } from '@bottom-tabs/react-navigation'
+import Icon from '@expo/vector-icons/FontAwesome'
+
+//import { Tabs } from '@/components/bottom-tabs'
+
+import TabBarIcon from '@/components/ui/TabBarIcon'
 import React from 'react';
 import { Platform } from 'react-native';
+import {Center } from 'app/components/ui/center'
+import { Pressable } from 'app/components/ui/pressable'
 
 import { HapticTab } from '@/components/HapticTab';
 import { IconSymbol } from '@/components/ui/IconSymbol';
@@ -14,32 +23,43 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarActiveTintColor: 'white',
+        tabBarInactiveTintColor: 'red',
         headerShown: false,
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: 'absolute',
-          },
-          default: {},
-        }),
-      }}>
+        tabBarStyle: {
+          position: 'absolute',
+        },
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
           title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="home" color={color} library="Feather" />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="add"
+        options={{
+          title: 'Add',
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="plus" color={color} library="FontAwesome5" />
+          ),
         }}
       />
       <Tabs.Screen
         name="explore"
         options={{
           title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="earth-americas" color={color} library="FontAwesome6" />
+          ),
         }}
       />
     </Tabs>
-  );
+  )
 }

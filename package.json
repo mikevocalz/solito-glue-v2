@@ -16,19 +16,21 @@
   },
   "scripts": {
     "native": "cd apps/expo && yarn start",
-    "web": "cd apps/next && yarn next"
+    "web": "cd apps/next && yarn next",
+    "postinstall": "patch-package"
   },
   "resolutions": {
     "metro": "~0.81.0",
     "metro-resolver": "~0.81.0",
-    "react-native": "0.76.1",
-    "nativewind": "4.1.21"
+    "react-native": "0.76.2",
+    "nativewind": "4.1.23",
+    "react-native-svg": "14.1.0"
   },
   "nohoist": [
     "**/expo-router",
     "**/expo-router/**"
   ],
-  "packageManager": "yarn@4.1.0",
+  "packageManager": "yarn@4.5.1",
   "peerDependencies": {
     "@gluestack-ui/nativewind-utils": "*"
   }

@@ -6,39 +6,75 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
 import {Provider} from 'app/provider'
-
+import {Spinner} from 'app/components/ui/spinner'
+import colors  from 'tailwindcss/colors'
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { ActivityIndicator } from 'react-native';
+import FontAwesome from '@expo/vector-icons/FontAwesome'
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
+
+type RootLayoutNavProps = {
+  mode: 'light' | 'dark'
+}
+
+export {
+  // Catch any errors thrown by the Layout component.
+  ErrorBoundary,
+} from 'expo-router'
+
+export const unstable_settings = {
+  // Ensure that reloading on `/modal` keeps a back button present.
+  initialRouteName: '(tabs)',
+}
+
+// Prevent the splash screen from auto-hiding before asset loading is complete.
+SplashScreen.preventAutoHideAsync()
+
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
+  const [loaded, error] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
+    ...FontAwesome.font,
+  })
+
+  // Expo Router uses Error Boundaries to catch errors in the navigation tree.
+  useEffect(() => {
+    if (error) throw error
+  }, [error])
 
   useEffect(() => {
     if (loaded) {
-      SplashScreen.hideAsync();
+      SplashScreen.hideAsync()
     }
-  }, [loaded]);
+  }, [loaded])
 
   if (!loaded) {
-    return(
-      <ActivityIndicator color={'red'} size={'large'} />
+    return (
+      <Provider mode="dark">
+        <Spinner size="large" color={colors.gray[500]} className='mt-[40vh]'/>
+      </Provider>
     )
   }
 
   return (
-    <Provider>
+      <RootLayoutNav  mode={'dark'}/>
+  )
+}
+
+function RootLayoutNav({ mode }: RootLayoutNavProps) {
+  const colorScheme = useColorScheme()
+
+  return (
+    <Provider mode={mode}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="+not-found" />
+          <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
         </Stack>
       </ThemeProvider>
     </Provider>
-  );
+  )
 }
+

@@ -2,6 +2,7 @@ const { withExpo } = require('@expo/next-adapter')
 const {withGluestackUI} = require('@gluestack/ui-next-adapter')
 
 
+
 const { DefinePlugin } = require('webpack')
 
 /** @type {import('next').NextConfig} */
@@ -12,7 +13,6 @@ const nextConfig = {
   // https://github.com/nandorojo/moti/issues/224
   // once that gets fixed, set this back to true
 
-  transpilePackages: ['nativewind', 'react-native-css-interop'],
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -74,6 +74,9 @@ const nextConfig = {
     'react-native-reanimated-carousel',
     'react-responsive-carousel',
     'expo-linear-gradient',
+    'lucide-react-native',
+    '@gluestack-ui/nativewind-utils',
+    'ReactNativeSVG.web.js'
   ],
 
   webpack(config, options) {

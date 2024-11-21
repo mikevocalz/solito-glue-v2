@@ -6,6 +6,7 @@ import StyledJsxRegistry from './registry'
 import NextTopLoader from 'nextjs-toploader'
 import { GluestackUIProvider } from 'app/components/ui/gluestack-ui-provider'
 import { ReactNode } from 'react'
+import  WebLayout  from 'app/layout/web'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -30,12 +31,14 @@ export default function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="#e0fe0e" />
         <link rel="manifest" href="../manifest.json" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
         />
       </head>
-      <body className={inter.className} style={{ display: 'flex' }}>
+      <body suppressHydrationWarning className={inter.className} style={{ display: 'flex' }}>
         <StyledJsxRegistry>
           <NextTopLoader
             color="#e0fe0e"
@@ -52,7 +55,11 @@ export default function RootLayout({
             zIndex={1600}
             showAtBottom={false}
           />
-          <GluestackUIProvider mode="light">{children}</GluestackUIProvider>
+          <GluestackUIProvider mode="light">
+            <WebLayout>
+            {children}
+            </WebLayout>
+          </GluestackUIProvider>
         </StyledJsxRegistry>
       </body>
     </html>

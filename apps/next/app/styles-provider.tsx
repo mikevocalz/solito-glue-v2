@@ -38,14 +38,16 @@ ${customFontCss}
 export function StylesProvider({ children }: { children: ReactNode }) {
   useServerInsertedHTML(() => {
     const sheet = StyleSheet.getSheet()
-    return (
-      (<style dangerouslySetInnerHTML={{ __html: style }} />),
-      (
-        <style
+
+    const sheets = [
+      <style dangerouslySetInnerHTML={{ __html: style }} />,
+      <style
           dangerouslySetInnerHTML={{ __html: sheet.textContent }}
           id={sheet.id}
         />
-      )
+    ]
+    return (
+      sheets
     )
   })
   return <>{children}</>

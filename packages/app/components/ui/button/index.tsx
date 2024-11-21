@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 'use client'
-import React, {
+import  {
   useMemo,
   forwardRef,
   ElementRef,
@@ -369,7 +369,7 @@ type IButtonProps = Omit<
 > &
   VariantProps<typeof buttonStyle> & { className?: string };
 
-const Button = React.forwardRef<
+const Button = forwardRef<
   ElementRef<typeof UIButton>,
   IButtonProps
 >(
@@ -479,7 +479,7 @@ const ButtonIcon = forwardRef<
 type IButtonGroupProps = ComponentPropsWithoutRef<typeof UIButton.Group> &
   VariantProps<typeof buttonGroupStyle>;
 
-const ButtonGroup = React.forwardRef<
+const ButtonGroup = forwardRef<
   ElementRef<typeof UIButton.Group>,
   IButtonGroupProps
 >(({ className, space = 'md', isAttached = false, ...props }, ref) => {
