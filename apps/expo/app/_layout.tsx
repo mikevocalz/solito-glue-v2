@@ -11,6 +11,7 @@ import colors  from 'tailwindcss/colors'
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { ActivityIndicator } from 'react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome'
+import * as ScreenOrientation from 'expo-screen-orientation'
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -50,6 +51,17 @@ export default function RootLayout() {
     }
   }, [loaded])
 
+
+  // async function changeScreenOrientation() {
+  //   await ScreenOrientation.lockAsync(
+  //     ScreenOrientation.OrientationLock.LANDSCAPE,
+  //   )
+  // }
+
+  //  useEffect(() => {
+  //  changeScreenOrientation()
+  //  }, [])
+
   if (!loaded) {
     return (
       <Provider mode="dark">
@@ -69,9 +81,9 @@ function RootLayoutNav({ mode }: RootLayoutNavProps) {
   return (
     <Provider mode={mode}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <Stack>
+        <Stack  screenOptions={{  gestureEnabled:true, }}>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+          <Stack.Screen name="modal" options={{ presentation: 'fullScreenModal' }} />
         </Stack>
       </ThemeProvider>
     </Provider>

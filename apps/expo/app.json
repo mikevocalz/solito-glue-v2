@@ -15,7 +15,8 @@
     },
     "ios": {
       "supportsTablet": true,
-            "bundleIdentifier": "com.solito.nativewind"
+      "bundleIdentifier": "com.solito.nativewind",
+      "requireFullScreen": true
     },
     "android": {
       "adaptiveIcon": {
@@ -40,7 +41,13 @@
              "deploymentTarget": "16.0"
          }
         }      
-      ]
+      ],
+       [
+         "expo-screen-orientation",
+         {
+           "initialOrientation": "PORTRAIT_UP"
+         }
+       ]
     ],
     "experiments": {
       "typedRoutes": true

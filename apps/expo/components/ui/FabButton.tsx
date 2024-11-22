@@ -3,6 +3,7 @@ import { View, TouchableOpacity, StyleSheet, Animated } from 'react-native'
 import { useNavigation, useNavigationState } from '@react-navigation/native'
 import { Ionicons } from '@expo/vector-icons'
 import { Pressable } from 'app/components/ui/pressable'
+import Cutout from './Cutout'
 
 interface RouteProps {
   id: number
@@ -76,13 +77,14 @@ const FabButton = ({
   }
 
   return (
-    <View style={styles.container}>
+    <View  style={styles.container} className='mx-auto items-center'>
       {/* Expanding FAB-like buttons */}
       {routes.reverse().map((route, index) => {
         const pos = calculatePosition(index, routes.length)
         return (
           <Animated.View
             key={index}
+            className={'mx-auto'}
             style={[
               styles.fab,
               {
@@ -121,6 +123,7 @@ const FabButton = ({
       <Pressable style={styles.mainFab} onPress={toggleFab}>
         {children}
       </Pressable>
+
     </View>
   )
 }
@@ -128,22 +131,24 @@ const FabButton = ({
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    bottom: 2,
-     alignItems: 'center',
+    bottom: 0,
+    right: 0,
+    left: 0,
+    alignItems: 'center',
   },
   fab: {
     position: 'absolute',
     alignItems: 'center',
     justifyContent: 'center',
+    bottom: 40,
   },
   mainFab: {
-    backgroundColor: '#6200EE',
-    height: 80,
-    width: 80,
-    borderRadius: 80/4,
+    backgroundColor: 'transparent',
+    height: 56,
+    aspectRatio: 16 / 9,
     alignItems: 'center',
     justifyContent: 'center',
-    elevation: 5,
+    bottom: 26,
   },
   smallButton: {
     backgroundColor: '#03DAC5',

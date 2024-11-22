@@ -7,9 +7,11 @@ import Icon from '@expo/vector-icons/FontAwesome'
 
 import TabBarIcon from '@/components/ui/TabBarIcon'
 import React from 'react'
-import { Platform } from 'react-native'
+import { Platform, useWindowDimensions } from 'react-native'
 import { Center } from 'app/components/ui/center'
 import { Pressable } from 'app/components/ui/pressable'
+import { View } from 'app/components/ui/view'
+
 
 import { HapticTab } from '@/components/HapticTab'
 import { IconSymbol } from '@/components/ui/IconSymbol'
@@ -17,6 +19,9 @@ import TabBarBackground from '@/components/ui/TabBarBackground'
 import { Colors } from '@/constants/Colors'
 import { useColorScheme } from '@/hooks/useColorScheme'
 import FabButton from '@/components/ui/FabButton'
+import MorpherButton from '@/components/ui/MorpherButton'
+import Cutout from '@/components/ui/Cutout'
+import Morpher from '@/components/ui/Morpher'
 
 
 export default function TabLayout() {
@@ -45,16 +50,33 @@ export default function TabLayout() {
       },
     ]
 
+const { height, width } = useWindowDimensions()
+
+ 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: 'white',
+        tabBarPosition: 'bottom',
+        tabBarActiveTintColor: 'black',
         tabBarInactiveTintColor: 'red',
-        headerShown: false,
+        headerShown: true,
+        headerTitleAlign: 'center',
         tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
+        //tabBarBackground: TabBarBackground,
+        tabBarItemStyle: {
+          backgroundColor: '#AEAD35',
+        },
         tabBarStyle: {
           position: 'absolute',
+          bottom: Platform.OS === 'android' ? 7 : 0,
+          right: 0,
+          left: 0,
+          paddingHorizontal: 9,
+          borderRadius: 10,
+          backgroundColor: 'transparent',
+          elevation: 4,
+          borderTopWidth: 0,
+          //backgroundColor: '#AEAD35',
         },
       }}
     >
@@ -62,6 +84,12 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Home',
+          tabBarItemStyle: {
+            borderTopLeftRadius: 10,
+            borderBottomLeftRadius: 10,
+            backgroundColor: '#AEAD35',
+            paddingRight: 4,
+          },
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="home" color={color} library="Feather" />
           ),
@@ -79,19 +107,52 @@ export default function TabLayout() {
       <Tabs.Screen
         name="add"
         options={{
-          title: 'Add',
+          tabBarItemStyle: {
+            backgroundColor: 'transparent',
+            //overflowX: 'hidden',
+            width: '100%',
+            height: '90%',
+            zIndex: -100,
+            pointerEvents: 'auto',
+          },
+          title: '',
           // tabBarIcon: ({ color }) => (
           //   <TabBarIcon name="plus" color={color} library="FontAwesome5" />
           // ),
 
           tabBarButton: (props) => (
-            <FabButton
-              {...props}
-              routes={fabRoutes}
-              // onPress={() => console.log('FAB pressed!')}
-            >
-              <TabBarIcon name="plus" color={'red'} library="Feather" />
-            </FabButton>
+            <>
+              <FabButton
+                {...props}
+                routes={fabRoutes}
+                // onPress={() => console.log('FAB pressed!')}
+              >
+                <Morpher
+                  height={'76%'}
+                  width={'76%'}
+                  style={{
+                    position: 'absolute',
+                    alignSelf: 'center',
+                    justifyContent: 'center',
+                    right: Platform.OS === 'android' ? '13%' : 12.5,
+                    bottom:Platform.OS === 'android' ?  '2%': -4,
+                    zIndex: 1000,
+                  }}
+                />
+              </FabButton>
+              <Cutout
+                width={width / 3.3}
+                height={width / 2.4}
+                style={{
+                  flex: 1,
+                  position: 'absolute',
+                  left: '-29%',
+                  top: -11,
+                  zIndex: -100,
+                  alignSelf: 'center',
+                }}
+              />
+            </>
           ),
         }}
       />
@@ -112,12 +173,13 @@ export default function TabLayout() {
         name="profile"
         options={{
           title: 'Profile',
+          tabBarItemStyle: {
+            borderTopRightRadius: 10,
+            borderBottomRightRadius: 10,
+            backgroundColor: '#AEAD35',
+          },
           tabBarIcon: ({ color }) => (
-            <TabBarIcon
-              name="user"
-              color={color}
-              library="FontAwesome6"
-            />
+            <TabBarIcon name="user" color={color} library="FontAwesome6" />
           ),
         }}
       />

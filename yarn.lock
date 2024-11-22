@@ -8379,6 +8379,7 @@ __metadata:
     expo-haptics: "npm:~14.0.0"
     expo-linking: "npm:~7.0.2"
     expo-router: "npm:~4.0.7"
+    expo-screen-orientation: "npm:~8.0.0"
     expo-splash-screen: "npm:~0.29.12"
     expo-status-bar: "npm:~2.0.0"
     expo-symbols: "npm:~0.2.0"
@@ -8393,7 +8394,7 @@ __metadata:
     react-native-gesture-handler: "npm:~2.20.2"
     react-native-reanimated: "npm:3.16.1"
     react-native-safe-area-context: "npm:4.14.0"
-    react-native-screens: "npm:4.2.0"
+    react-native-screens: "npm:4.3.0"
     react-native-svg: "npm:15.8.0"
     react-native-svg-transformer: "npm:^1.5.0"
     react-native-web: "npm:~0.19.13"
@@ -8584,6 +8585,16 @@ __metadata:
     react-native-reanimated:
       optional: true
   checksum: 10/f835bf2551c675bc8ea1d0a20298d43e0b48abcf04f3ac5ad9ddcda6762c6070edc7457ce24f413bdebc054d38c91b143759bdb84f65136c558c518dc5011d86
+  languageName: node
+  linkType: hard
+
+"expo-screen-orientation@npm:~8.0.0":
+  version: 8.0.0
+  resolution: "expo-screen-orientation@npm:8.0.0"
+  peerDependencies:
+    expo: "*"
+    react-native: "*"
+  checksum: 10/e192211a1e20500eae4e4a691f50dc1e9096bc84158c193f6fd233639c6533626bfb119d2314008192c5299a0897839d62ff1e777d1e0494d8bc50ef8123a9c3
   languageName: node
   linkType: hard
 
@@ -13555,16 +13566,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-screens@npm:4.2.0":
-  version: 4.2.0
-  resolution: "react-native-screens@npm:4.2.0"
+"react-native-screens@npm:4.3.0":
+  version: 4.3.0
+  resolution: "react-native-screens@npm:4.3.0"
   dependencies:
     react-freeze: "npm:^1.0.0"
     warn-once: "npm:^0.1.0"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10/b38cc39e5e4f19d8df2b771dddfab117c547353d9e265697771d75aff96218d8a6296bc39ac6e6a32316b231d05d1fa20be8bfbf31745f9368115321e4026520
+  checksum: 10/3c33d282712f1b7274a88a1bfcaa8de1f012b0a1afd0b3de04714579ec37d803bc22f5bc78b72c0a6f6743e349d77744f7201f6f94f3ab1a6e82aa149e495b9a
   languageName: node
   linkType: hard
 
