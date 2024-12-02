@@ -83,7 +83,7 @@ function RootLayoutNav({ mode }: RootLayoutNavProps) {
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack  screenOptions={{  gestureEnabled:true, }}>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="modal" options={{ presentation: 'fullScreenModal' }} />
+          <Stack.Screen name="modal" options={{ presentation: 'fullScreenModal', headerBackVisible:true,headerBackButtonDisplayMode:'minimal' }} />
         </Stack>
       </ThemeProvider>
     </Provider>

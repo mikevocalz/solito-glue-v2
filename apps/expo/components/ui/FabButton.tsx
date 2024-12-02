@@ -4,6 +4,7 @@ import { useNavigation, useNavigationState } from '@react-navigation/native'
 import { Ionicons } from '@expo/vector-icons'
 import { Pressable } from 'app/components/ui/pressable'
 import Cutout from './Cutout'
+import PowerCoin from './PowerCoin'
 
 interface RouteProps {
   id: number
@@ -45,7 +46,7 @@ const FabButton = ({
         duration: 300,
         useNativeDriver: true,
       }).start(() => setExpanded(false))
-    }, 16000) // 20 seconds
+    }, 10000) // 10 seconds
   }
 
   useEffect(() => {
@@ -107,13 +108,16 @@ const FabButton = ({
             ]}
           >
             <Pressable
-              style={styles.smallButton}
+              style={[styles.smallButton,{alignItems:'center', justifyContent:'center'}]}
               onPress={() => {
                 toggleFab()
                 navigation.navigate(route.name as never)
               }}
             >
-              <Ionicons name={route.icon} size={20} color="white" />
+              {/* <Ionicons name={route.icon} size={20} color="white" /> */}
+              <PowerCoin style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+                <Ionicons name={route.icon} size={28} color="black" style={{alignSelf:'center',marginVertical:10, marginHorizontal:11}} />
+              </PowerCoin>
             </Pressable>
           </Animated.View>
         )
@@ -144,17 +148,17 @@ const styles = StyleSheet.create({
   },
   mainFab: {
     backgroundColor: 'transparent',
-    height: 56,
+    height: 38,
     aspectRatio: 16 / 9,
     alignItems: 'center',
     justifyContent: 'center',
     bottom: 26,
   },
   smallButton: {
-    backgroundColor: '#03DAC5',
-    height: 40,
-    width: 40,
-    borderRadius: 20,
+    backgroundColor: '#fff',
+    height: 51,
+    width: 51,
+    borderRadius: 51/2,
     alignItems: 'center',
     justifyContent: 'center',
     elevation: 4,

@@ -141,13 +141,12 @@ const { height, width } = useWindowDimensions()
                 />
               </FabButton>
               <Cutout
-                width={width / 3.3}
-                height={width / 2.4}
+                width={width / 2.9}
+                height={300}
                 style={{
-                  flex: 1,
                   position: 'absolute',
-                  left: '-29%',
-                  top: -11,
+                  right: '-44%',
+                  top: -14,
                   zIndex: -100,
                   alignSelf: 'center',
                 }}
